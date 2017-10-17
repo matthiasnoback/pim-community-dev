@@ -20,7 +20,7 @@ abstract class AbstractProduct implements ProductInterface
     protected $id;
 
     /** @var array */
-    protected $rawValues;
+    protected $rawValues = [];
 
     /** @var \Datetime $created */
     protected $created;
@@ -408,6 +408,16 @@ abstract class AbstractProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function setCategories(Collection $categories)
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCategories()
     {
         return $this->categories;
@@ -515,6 +525,16 @@ abstract class AbstractProduct implements ProductInterface
         }
 
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGroups(Collection  $groups)
+    {
+        $this->groups = $groups;
+
+        return $this;
     }
 
     /**
@@ -671,6 +691,13 @@ abstract class AbstractProduct implements ProductInterface
     public function addUniqueData(ProductUniqueDataInterface $uniqueData)
     {
         $this->uniqueData->add($uniqueData);
+
+        return $this;
+    }
+
+    public function setUniqueData(Collection $collection)
+    {
+        $this->uniqueData = $collection;
 
         return $this;
     }
