@@ -226,7 +226,7 @@ class FamilyVariantUpdater implements ObjectUpdaterInterface
         array $attributeSetData
     ): void {
         $currentLevel = $attributeSetData['level'];
-        $previousAttributeSetAttributes = [];
+        $previousAttributeSetAttributes = $familyVariant->getCommonAttributes();
 
         while (1 < $currentLevel) {
             $attributeSet = $familyVariant->getVariantAttributeSet($attributeSetData['level'] - 1);
@@ -235,8 +235,6 @@ class FamilyVariantUpdater implements ObjectUpdaterInterface
             }
             $currentLevel--;
         }
-
-        $previousAttributeSetAttributes[] = $familyVariant->getCommonAttributes();
 
         foreach ($previousAttributeSetAttributes as $previousAttributes) {
             foreach ($previousAttributes as $previousAttribute) {
