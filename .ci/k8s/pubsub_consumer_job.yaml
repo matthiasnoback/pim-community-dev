@@ -51,39 +51,14 @@ spec:
             - { name: tmp-pod, mountPath: /tmp/pod, readOnly: true }
           resources:
             requests: {cpu: "100m", memory: "700Mi"}
-        - name: elasticsearch
-          image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
-          command: ["/bin/bash", "-c"]
-          args:
-            - |
-              /usr/share/elasticsearch/bin/es-docker &
-              CHILD_PID=$!
-              (while true; do if [[ -f "/tmp/pod/main-terminated" ]]; then kill $CHILD_PID; fi; sleep 1; done) &
-              wait $CHILD_PID
-              if [[ -f "/tmp/pod/main-terminated" ]]; then exit 0; fi
-          env:
-            - { name: ES_JAVA_OPTS, value: "-Xms1g -Xmx1g" }
-          volumeMounts:
-            - { name: tmp-pod, mountPath: /tmp/pod, readOnly: true }
-          resources:
-            requests: {cpu: "100m", memory: "1500Mi"}
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 9200
-              httpHeaders:
-                - name: Authorization
-                  value: Basic ZWxhc3RpYzpjaGFuZ2VtZQ==
-            timeoutSeconds: 1
-            initialDelaySeconds: 5
         - name: php
-          image: eu.gcr.io/akeneo-ci/httpd-php:5.6
+          image: akeneo/apache-php:php-5.6
           command: ["/bin/bash", "-c"]
           args:
             - |
-              /usr/local/bin/apache-foreground &
+              sudo /usr/local/bin/apache-foreground &
               CHILD_PID=$!
-              (while true; do if [[ -f "/tmp/pod/main-terminated" ]]; then kill $CHILD_PID; fi; sleep 1; done) &
+              (while true; do if [[ -f "/tmp/pod/main-terminated" ]]; then sudo kill -9 $CHILD_PID; fi; sleep 1; done) &
               wait $CHILD_PID
               if [[ -f "/tmp/pod/main-terminated" ]]; then exit 0; fi
 
@@ -97,7 +72,7 @@ spec:
               exec:
                 command: ["/usr/sbin/apache2ctl", "stop"]
           resources:
-            requests: {cpu: "300m", memory: "2200Mi"}
+            requests: {cpu: "300m", memory: "2500Mi"}
         - name: selenium
           image: selenium/standalone-firefox:2.53.1-beryllium
           command: ["/bin/bash", "-c"]
