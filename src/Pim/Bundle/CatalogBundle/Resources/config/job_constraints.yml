@@ -1,10 +1,18 @@
 parameters:
     pim_catalog.job.job_parameters.constraint_collection_provider.compute_product_models_descendants.class: Pim\Component\Catalog\Job\JobParameters\ConstraintCollectionProvider\ComputeProductModelsDescendants
+    pim_catalog.job.job_parameters.constraint_collection_provider.compute_variant_structure_changes.class: Pim\Component\Catalog\Job\JobParameters\ConstraintCollectionProvider\ComputeVariantStructureChanges
 
 services:
     pim_catalog.job.job_parameters.constraint_collection_provider.compute_product_models_descendants:
         class: '%pim_catalog.job.job_parameters.constraint_collection_provider.compute_product_models_descendants.class%'
         arguments:
             - ['compute_product_models_descendants']
+        tags:
+            - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
+
+    pim_catalog.job.job_parameters.constraint_collection_provider.compute_variant_structure_changes:
+        class: '%pim_catalog.job.job_parameters.constraint_collection_provider.compute_variant_structure_changes.class%'
+        arguments:
+            - ['compute_variant_structure_changes']
         tags:
             - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
