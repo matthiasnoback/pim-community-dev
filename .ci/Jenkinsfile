@@ -33,6 +33,7 @@ stage("Build") {
                     checkout scm
                     container("php") {
                         sh "composer update --optimize-autoloader --no-interaction --no-progress --prefer-dist"
+                        sh "composer require --dev --no-update liuggio/fastest:~1.4"
                         sh "app/console oro:requirejs:generate-config"
                         sh "app/console assets:install"
                     }
