@@ -7,6 +7,7 @@ namespace Pim\Component\Catalog\Repository;
 use Akeneo\Component\StorageUtils\Repository\CursorableRepositoryInterface;
 use Akeneo\Component\StorageUtils\Repository\IdentifiableObjectRepositoryInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Pim\Component\Catalog\Model\FamilyVariantInterface;
 use Pim\Component\Catalog\Model\ProductModelInterface;
 
 /**
@@ -78,4 +79,11 @@ interface ProductModelRepositoryInterface extends
      * @return array
      */
     public function findChildrenProducts(ProductModelInterface $productModel): array;
+
+    /**
+     * @param FamilyVariantInterface $familyVariant
+     *
+     * @return array
+     */
+    public function findNotRootProductModelsWithFamilyVariant(FamilyVariantInterface $familyVariant): array;
 }
