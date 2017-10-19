@@ -4,7 +4,7 @@ namespace Pim\Component\Catalog\Job;
 
 use Akeneo\Component\Batch\Model\StepExecution;
 use Doctrine\ORM\EntityRepository;
-use Pim\Component\Catalog\FamilyVariant\ChangeFamilyVariantStructureOnDescendants;
+use Pim\Component\Catalog\FamilyVariant\ApplyChangeFamilyVariantStructureOnDescendants;
 use Pim\Component\Connector\Step\TaskletInterface;
 
 /**
@@ -20,16 +20,16 @@ class ComputeVariantStructureChangesTasklet implements TaskletInterface
     /** @var EntityRepository */
     private $familyVariantRepository;
 
-    /** @var ChangeFamilyVariantStructureOnDescendants */
+    /** @var ApplyChangeFamilyVariantStructureOnDescendants */
     private $changeStructure;
 
     /**
-     * @param EntityRepository                          $familyVariantRepository
-     * @param ChangeFamilyVariantStructureOnDescendants $changeStructure
+     * @param EntityRepository                               $familyVariantRepository
+     * @param ApplyChangeFamilyVariantStructureOnDescendants $changeStructure
      */
     public function __construct(
         EntityRepository $familyVariantRepository,
-        ChangeFamilyVariantStructureOnDescendants $changeStructure
+        ApplyChangeFamilyVariantStructureOnDescendants $changeStructure
     ) {
         $this->familyVariantRepository = $familyVariantRepository;
         $this->changeStructure = $changeStructure;

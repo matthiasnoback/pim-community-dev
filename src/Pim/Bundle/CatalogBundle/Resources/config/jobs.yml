@@ -48,7 +48,7 @@ services:
         class: '%pim_catalog.tasklet.compute_family_variant_structure_changes.class%'
         arguments:
             - '@pim_catalog.repository.family_variant'
-            - '@pim_catalog.family_variant.change_family_variant_structure'
+            - '@pim_catalog.family_variant.apply_change_family_variant_structure'
         public: false
 
     pim_catalog.step.compute_family_variant_structure_changes:

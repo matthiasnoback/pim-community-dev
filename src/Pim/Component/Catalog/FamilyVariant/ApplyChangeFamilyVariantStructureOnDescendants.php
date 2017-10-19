@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pim\Component\Catalog\FamilyVariant;
 
 use Akeneo\Component\StorageUtils\Saver\SaverInterface;
@@ -15,7 +17,7 @@ use Pim\Component\Catalog\Repository\ProductModelRepositoryInterface;
  * @copyright 2017 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  */
-class ChangeFamilyVariantStructureOnDescendants
+class ApplyChangeFamilyVariantStructureOnDescendants
 {
     /** @var ObjectRepository */
     private $variantProductRepository;
@@ -52,18 +54,7 @@ class ChangeFamilyVariantStructureOnDescendants
      */
     public function changeStructure(FamilyVariantInterface $familyVariant): void
     {
-        $attributeSets = $familyVariant->getVariantAttributeSets()->toArray();
-
-        usort($attributeSets, function (
-            VariantAttributeSetInterface $a,
-            VariantAttributeSetInterface $b
-        ) {
-            if ($a->getLevel() === $b->getLevel()) {
-                return 0;
-            }
-
-            return ($a->getLevel() > $b->getLevel()) ? -1 : 1;
-        });
+        $attributeSets = $this->getSortedAttributeSetsByLevel($familyVariant);
 
         foreach ($attributeSets as $attributeSet) {
             if ($attributeSet->getLevel() === $familyVariant->getNumberOfLevel()) {
@@ -107,5 +98,31 @@ class ChangeFamilyVariantStructureOnDescendants
         }
 
         $entity->setValues($productValues);
+    }
+
+    /**
+     * Get sorted attribute sets by level.
+     * It returns the attribute sets from low level to top level, so, level 2 first, then level 1...
+     *
+     * @param FamilyVariantInterface $familyVariant
+     *
+     * @return array
+     */
+    private function getSortedAttributeSetsByLevel(FamilyVariantInterface $familyVariant): array
+    {
+        $attributeSets = $familyVariant->getVariantAttributeSets()->toArray();
+
+        usort($attributeSets, function (
+            VariantAttributeSetInterface $a,
+            VariantAttributeSetInterface $b
+        ) {
+            if ($a->getLevel() === $b->getLevel()) {
+                return 0;
+            }
+
+            return ($a->getLevel() > $b->getLevel()) ? -1 : 1;
+        });
+
+        return $attributeSets;
     }
 }

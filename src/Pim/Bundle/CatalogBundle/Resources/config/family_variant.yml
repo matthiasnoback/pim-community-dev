@@ -1,7 +1,7 @@
 parameters:
     pim_catalog.family_variant.provider.entity_with_family_variant_attributes.class: Pim\Component\Catalog\FamilyVariant\EntityWithFamilyVariantAttributesProvider
     pim_catalog.family_variant.add_unique_attributes.class: Pim\Component\Catalog\FamilyVariant\AddUniqueAttributes
-    pim_catalog.family_variant.change_family_variant_structure.class: Pim\Component\Catalog\FamilyVariant\ChangeFamilyVariantStructureOnDescendants
+    pim_catalog.family_variant.apply_change_family_variant_structure.class: Pim\Component\Catalog\FamilyVariant\ApplyChangeFamilyVariantStructureOnDescendants
 
 services:
     pim_catalog.family_variant.provider.entity_with_family_variant_attributes:
@@ -10,8 +10,8 @@ services:
     pim_catalog.family_variant.add_unique_attributes:
         class: '%pim_catalog.family_variant.add_unique_attributes.class%'
 
-    pim_catalog.family_variant.change_family_variant_structure:
-        class: '%pim_catalog.family_variant.change_family_variant_structure.class%'
+    pim_catalog.family_variant.apply_change_family_variant_structure:
+        class: '%pim_catalog.family_variant.apply_change_family_variant_structure.class%'
         arguments:
             - '@pim_catalog.repository.variant_product'
             - '@pim_catalog.repository.product_model'
