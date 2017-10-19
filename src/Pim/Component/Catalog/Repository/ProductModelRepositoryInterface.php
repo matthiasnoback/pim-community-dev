@@ -85,5 +85,5 @@ interface ProductModelRepositoryInterface extends
      *
      * @return array
      */
-    public function findNotRootProductModelsWithFamilyVariant(FamilyVariantInterface $familyVariant): array;
+    public function findSubProductModels(FamilyVariantInterface $familyVariant): array;
 }

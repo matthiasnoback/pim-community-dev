@@ -71,7 +71,7 @@ class ChangeFamilyVariantStructureOnDescendants
                     ->findBy(['familyVariant' => $familyVariant]);
             } else {
                 $entities = $this->productModelRepository
-                    ->findNotRootProductModelsWithFamilyVariant($familyVariant);
+                    ->findSubProductModels($familyVariant);
             }
 
             foreach ($entities as $entity) {

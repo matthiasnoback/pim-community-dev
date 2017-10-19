@@ -147,7 +147,7 @@ class ProductModelRepository extends EntityRepository implements ProductModelRep
     /**
      * {@inheritdoc}
      */
-    public function findNotRootProductModelsWithFamilyVariant(FamilyVariantInterface $familyVariant): array
+    public function findSubProductModels(FamilyVariantInterface $familyVariant): array
     {
         $qb = $this
             ->createQueryBuilder('pm')
