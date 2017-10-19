@@ -217,8 +217,8 @@ jobs:
         alias:     compute_product_models_descendants
         label:     Compute product models descendants
         type:      compute_product_models_descendants
-    compute_variant_structure_changes:
+    compute_family_variant_structure_changes:
         connector: internal
-        alias:     compute_variant_structure_changes
+        alias:     compute_family_variant_structure_changes
         label:     Compute variant structure changes
-        type:      compute_variant_structure_changes
+        type:      compute_family_variant_structure_changes
