@@ -11,19 +11,12 @@
 
 - PIM-6773: Add the missing required attributes filter in the product model edit form
 - PIM-6806: Update product completenesses whenever the attribute requirements of a family are updated
+- PIM-6354: Adds product models during quick exports
 
 ## BC breaks
 
 - Change the constructor of `Pim\Component\Catalog\Completeness\CompletenessCalculator`. Remove `Pim\Component\Catalog\Factory\ValueFactory` and both `Akeneo\Component\StorageUtils\Repository\CachedObjectRepositoryInterface`. Add `Pim\Component\Catalog\EntityWithFamily\IncompleteValueCollectionFactory` and `Pim\Component\Catalog\EntityWithFamily\RequiredValueCollectionFactory`.
 - Change the constructor of `Pim\Bundle\EnrichBundle\Normalizer\ProductModelNormalizer` to add `Symfony\Component\Serializer\Normalizer\NormalizerInterface`.
-
-## Better manage products with variants!
-
-- PIM-6354: Adds product models during quick exports
-
-## BC breaks
-
-- Rename `Pim\Bundle\EnrichBundle\Connector\Job\JobParameters\ConstraintCollectionProvider\ProductQuickExport` to `ProductAndProductModelQuickExport`
 - Rename `Pim\Bundle\EnrichBundle\Connector\Processor\QuickExport\ProductProcessor` to `ProductAndProductModelProcessor`
 - Updates quick export configurations to remove `filePath` and add `filePathProduct` and `filePathProductModel`. Please execute `bin/console doctrine:migrations:migrate` to migrate your configurations.
 
