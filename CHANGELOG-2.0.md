@@ -25,7 +25,6 @@
 
 - Rename `Pim\Bundle\EnrichBundle\Connector\Job\JobParameters\ConstraintCollectionProvider\ProductQuickExport` to `ProductAndProductModelQuickExport`
 - Rename `Pim\Bundle\EnrichBundle\Connector\Processor\QuickExport\ProductProcessor` to `ProductAndProductModelProcessor`
-- Rename `Pim\Bundle\EnrichBundle\Connector\Reader\MassEdit\FilteredProductAndProductModelReader` to `FilteredProductReader`
 - Updates quick export configurations to remove `filePath` and add `filePathProduct` and `filePathProductModel`. Please execute `bin/console doctrine:migrations:migrate` to migrate your configurations.
 
 # 2.0.4 (2017-10-19)
