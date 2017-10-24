@@ -291,7 +291,11 @@ void runIntegrationTest(String phpVersion, String edition, def testFiles) {
 
                         sh "sed -i \"s#<file></file>#${testSuiteFiles}#\" app/phpunit.xml.dist"
 
-                        sh "php -d error_reporting='E_ALL' ./vendor/bin/phpunit -c app/phpunit.xml.dist --testsuite PIM_Integration_Test --log-junit app/build/logs/phpunit_integration.xml"
+                        if ('ce' == edition) {
+                            sh "php -d error_reporting='E_ALL' ./vendor/bin/phpunit -c app/phpunit.xml.dist --testsuite PIM_Integration_Test --log-junit app/build/logs/phpunit_integration.xml"
+                        } else {
+                            sh "php -d error_reporting='E_ALL' ./vendor/bin/phpunit -c app/phpunit.xml.dist --testsuite PIM_Integration_Test --exclude-group ce --log-junit app/build/logs/phpunit_integration.xml"
+                        }
                     }
                 }
             }
