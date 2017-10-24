@@ -17,6 +17,17 @@
 - Change the constructor of `Pim\Component\Catalog\Completeness\CompletenessCalculator`. Remove `Pim\Component\Catalog\Factory\ValueFactory` and both `Akeneo\Component\StorageUtils\Repository\CachedObjectRepositoryInterface`. Add `Pim\Component\Catalog\EntityWithFamily\IncompleteValueCollectionFactory` and `Pim\Component\Catalog\EntityWithFamily\RequiredValueCollectionFactory`.
 - Change the constructor of `Pim\Bundle\EnrichBundle\Normalizer\ProductModelNormalizer` to add `Symfony\Component\Serializer\Normalizer\NormalizerInterface`.
 
+## Better manage products with variants!
+
+- PIM-6354: Adds product models during quick exports
+
+## BC breaks
+
+- Rename `Pim\Bundle\EnrichBundle\Connector\Job\JobParameters\ConstraintCollectionProvider\ProductQuickExport` to `ProductAndProductModelQuickExport`
+- Rename `Pim\Bundle\EnrichBundle\Connector\Processor\QuickExport\ProductProcessor` to `ProductAndProductModelProcessor`
+- Rename `Pim\Bundle\EnrichBundle\Connector\Reader\MassEdit\FilteredProductAndProductModelReader` to `FilteredProductReader`
+- Updates quick export configurations to remove `filePath` and add `filePathProduct` and `filePathProductModel`. Please execute `bin/console doctrine:migrations:migrate` to migrate your configurations.
+
 # 2.0.4 (2017-10-19)
 
 # 2.0.3 (2017-10-19)
